@@ -29,20 +29,19 @@ const renderButton = (textNode, onClickCb, customButtonStyles = {}) => {
 };
 
 const AuthActionButton = (props) => {
-  const isHomePage = window.location.pathname !== "/faceted-search";
   const { loginWithRedirect, logout, user, isAuthenticated } = useAuth0();
   const [showDropdown, setShowDropdown] = useState(false);
   let history = useHistory();
 
   const renderActionElement = () => {
-    if (!isAuthenticated && isHomePage) {
+    if (!isAuthenticated && window.location.pathname !== "/faceted-search") {
       return renderButton(() => "Login", loginWithRedirect);
     }
 
     if (isAuthenticated) {
       return (
         <Box display="flex" align-items="center">
-          {isHomePage &&
+          {window.location.pathname === "/faceted-search" &&
             renderButton(
               () => (
                 <Icon
@@ -104,7 +103,7 @@ const AuthActionButton = (props) => {
     }
   };
 
-  if (!isHomePage && !isAuthenticated) {
+  if (!(window.location.pathname !== "/faceted-search") && !isAuthenticated) {
     history.push("/");
   }
 
