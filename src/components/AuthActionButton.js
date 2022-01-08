@@ -41,7 +41,7 @@ const AuthActionButton = (props) => {
     if (isAuthenticated) {
       return (
         <Box display="flex" align-items="center">
-          {window.location.pathname === "/faceted-search" &&
+          {window.location.pathname === "/" &&
             renderButton(
               () => (
                 <Icon
