@@ -88,7 +88,11 @@ const AuthActionButton = (props) => {
                   height="36px"
                   padding="0"
                   background="#9abcc6"
-                  onClick={() => logout()}
+                  onClick={() =>
+                    logout({
+                      returnTo: "https://quarkly-template-3.netlify.app/",
+                    })
+                  }
                 >
                   Logout
                 </Button>
@@ -99,6 +103,10 @@ const AuthActionButton = (props) => {
       );
     }
   };
+
+  if (!isHomePage && !isAuthenticated) {
+    history.push("/");
+  }
 
   return <div {...props}>{renderActionElement()}</div>;
 };
